@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>712610445728-224a9r3e61aautqkdf5h8vsa39t4f9be.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.712610445728-224a9r3e61aautqkdf5h8vsa39t4f9be</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC3fG1t5ef9G96OKyu0SQLMkc-z_SLXsHw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>712610445728</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.warline.app</string>
+	<key>PROJECT_ID</key>
+	<string>warline-15767</string>
+	<key>STORAGE_BUCKET</key>
+	<string>warline-15767.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:712610445728:ios:3981be3f5d82f576138cc5</string>
+</dict>
+</plist>
