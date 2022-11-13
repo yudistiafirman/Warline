@@ -1,0 +1,40 @@
+{
+    "project_info": {
+      "project_number": "712610445728",
+      "project_id": "warline-15767",
+      "storage_bucket": "warline-15767.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:712610445728:android:2e345c6a3d97fdba138cc5",
+          "android_client_info": {
+            "package_name": "com.warline.app"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "712610445728-apembt7rtkeug40con9mio5kqud343tg.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyD0gL4BrfuhEGwjdFEZc_BQK9CZGJPRxnI"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "712610445728-apembt7rtkeug40con9mio5kqud343tg.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }
+  
