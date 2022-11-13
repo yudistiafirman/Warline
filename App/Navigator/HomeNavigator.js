@@ -2,14 +2,28 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import FontistoIcons from 'react-native-vector-icons/Fontisto'
-import { Text, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import {Default} from '../Utils/Default'
+import auth from '@react-native-firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 const Tab = createBottomTabNavigator()
 
 
-const HomeScreen =()=>{
+const HomeScreen =({navigation})=>{
+
+  const onSignOut = () =>{
+    auth().signOut().then(()=>{
+      console.log('user sign out')
+      AsyncStorage.removeItem('isLogin')
+      navigation.navigate('Login')
+    })
+ 
+  }
     return <View>
         <Text>HomeScreen</Text>
+        <TouchableOpacity onPress={onSignOut}>
+          <Text>Sign Out</Text>
+        </TouchableOpacity>
     </View>
 }
 

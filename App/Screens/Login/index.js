@@ -4,14 +4,14 @@ import CredentialsButton from '../../Components/CredentialsButton'
 import CredentialsInput from '../../Components/CredentialsInput'
 import { style } from '../../GlobalStyles'
 import { Default } from '../../Utils/Default'
-import {onChangeEmail,onChangePassword} from '../../Redux/Actions/userActions'
+import {onChangeEmail,onChangePassword,onLogin} from '../../Redux/Actions/userActions'
 import { connect } from 'react-redux'
-const Login = ({navigation,onChangeEmail,onChangePassword,user}) => {
+import Spinner from 'react-native-loading-spinner-overlay'
+const Login = ({navigation,onChangeEmail,onChangePassword,onLogin,user}) => {
 
-  const onLogin = ()=>{
-    console.log('email',user.email)
-    console.log('password',user.password)
-  }
+
+
+
   return (
     <View style={style.container}>
       <KeyboardAvoidingView behavior='padding'>
@@ -31,15 +31,19 @@ const Login = ({navigation,onChangeEmail,onChangePassword,user}) => {
         placeholder="Password"
         secureTextEntry
         />
-        <CredentialsButton onPress={onLogin} buttonText="Login"/>
-      
+        <CredentialsButton onPress={()=>onLogin(user.email,user.password,navigation)} buttonText="Login"/>
+        <Spinner 
+        visible={user.loading}
+        textContent={'Please Wait...'}
+        textStyle={{ color: 'white' }}
+        />
       </KeyboardAvoidingView>
        
     </View>
   )
 }
 const mapDispatchToProps ={
-  onChangeEmail,onChangePassword
+  onChangeEmail,onChangePassword,onLogin
 }
 
 const mapStateToProps =(state)=> {
