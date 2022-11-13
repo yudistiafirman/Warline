@@ -10,12 +10,14 @@ const CredentialsInput = (props) => {
     let keyboardType = props.keyboardType
     let onChangeText = props.onChangeText
     let secureTextEntry = props.secureTextEntry
+    let value = props.value
 
   return (
     <TextInput
     style={styles.inputBox}
     mode='outlined'
     label={label}
+    value={value}
     placeholder={placeholder}
     placeholderTextColor='#B9BBC2'
     underlineColor='rgba(0,0,0,0)'

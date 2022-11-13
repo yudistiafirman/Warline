@@ -1,0 +1,9 @@
+const Types= {
+    CHANGE_EMAIL : 'CHANGE_EMAIL',
+    CHANGE_PASSWORD : 'CHANGE_PASSWORD',
+    LOADING : 'LOADING',
+    AUTH_SUCSESS : 'AUTH_SUCCESS',
+    ERROR_LOGIN :'ERROR_LOGIN'
+}
+
+export default Types
