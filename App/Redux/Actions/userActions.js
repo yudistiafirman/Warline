@@ -1,7 +1,7 @@
 import Types from "../type";
-import auth from '@react-native-firebase/auth'
 import { Alert } from "react-native"
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { userAuth } from "../../Api/UserAuth";
 
 
 export const onChangeEmail = (text)=>({type:Types.CHANGE_EMAIL,payload :text })
@@ -13,21 +13,16 @@ export const onLogin = (email,password,navigation)=> {
         dispatch({
             type : Types.LOADING
         })
-        auth()
-        .signInWithEmailAndPassword(email, password)
-        .then((response) => {
+        userAuth(email,password,(response)=>{
                 dispatch({type:Types.AUTH_SUCSESS,payload:response.user.uid})
-                console.log('ini response login',response)
                 AsyncStorage.setItem('isLogin','true')
                 navigation.navigate('Home')
-
-        })
-        .catch(error => {
+        },(err)=>{
             dispatch({type:Types.ERROR_LOGIN})
-            if(error.code ==='auth/user-not-found')Alert.alert('The email not connected with any accounts')
-            if(error.code === 'auth/invalid-email')Alert.alert('The email address badly formatted')
-            if(error.code === 'auth/wrong-password')Alert.alert('The password is Invalid')
-            console.log(error)
+                if(error.code ==='auth/user-not-found')Alert.alert('The email not connected with any accounts')
+                if(error.code === 'auth/invalid-email')Alert.alert('The email address badly formatted')
+                if(error.code === 'auth/wrong-password')Alert.alert('The password is Invalid')
+                console.log(error)
         })
 
     }

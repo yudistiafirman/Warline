@@ -12,16 +12,13 @@ useEffect(()=>{
    },2000)
  },[])
 
-const goToNextScreen =()=>{
-      if(isUserHasLoggedIn()){
-         navigateToHomePage()
-      } 
-      navigateToLoginPage()
- }
-
- const isUserHasLoggedIn = async () => {
+ const goToNextScreen = async () => {
    const isLogin = await AsyncStorage.getItem('isLogin')
-   return isLogin
+   if(isLogin){
+      navigateToHomePage()
+   }else{
+      navigateToLoginPage()
+   }
  }
 
  const navigateToHomePage = () => navigation.navigate('Home')
