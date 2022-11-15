@@ -12,10 +12,10 @@ useEffect(()=>{
    },2000)
  },[])
 
-const goToNextScreen =async()=>{
+const goToNextScreen =()=>{
       if(isUserHasLoggedIn()){
          navigateToHomePage()
-      }
+      } 
       navigateToLoginPage()
  }
 

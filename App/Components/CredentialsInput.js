@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet} from 'react-native'
 import { TextInput } from 'react-native-paper'
+import { style } from '../GlobalStyles'
 import { Default } from '../Utils/Default'
 import Utils from '../Utils/Utils'
 
@@ -11,10 +12,11 @@ const CredentialsInput = (props) => {
     let onChangeText = props.onChangeText
     let secureTextEntry = props.secureTextEntry
     let value = props.value
+    let styles = props.styles
 
   return (
     <TextInput
-    style={styles.inputBox}
+    style={styles}
     mode='outlined'
     label={label}
     value={value}
@@ -30,14 +32,5 @@ const CredentialsInput = (props) => {
   )
 }
 
-const styles = StyleSheet.create({
-    inputBox: {
-        width: Default.deviceWidth/1.4,
-        fontSize: Utils.moderateScale(14),
-        color: '#333',
-        marginBottom:20,
-    
-      }
-})
 
 export default CredentialsInput

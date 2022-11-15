@@ -2,17 +2,23 @@ import React from 'react'
 import { Splash } from '../Screens/Splash'
 import Login from '../Screens/Login'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Home from './HomeNavigator'
+import HomeScreen from '../Screens/Home'
+import AddProducts from '../Screens/AddProduct'
+
 
 const Stack = createNativeStackNavigator()
 
 const AppRoutes = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown:false}}>
-        <Stack.Screen   name="Splash" component={Splash}/>
-        <Stack.Screen   name="Login" component={Login}/>
-        <Stack.Screen name = "Home" component={Home}/>
-    </Stack.Navigator>
+    <Stack.Navigator >
+        <Stack.Screen options={{headerShown:false}} name="Splash" component={Splash}/>
+        <Stack.Screen options={{headerShown:false}} name="Login" component={Login}/>
+        <Stack.Screen options={{headerShown:false}} name="Home" component={HomeScreen} />
+        <Stack.Screen 
+        name="AddProducts" 
+        options={{title:"Add Product",headerBackTitleVisible:false}} 
+        component={AddProducts}  />
+     </Stack.Navigator>
   )
 }
 

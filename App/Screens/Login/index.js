@@ -7,6 +7,7 @@ import { Default } from '../../Utils/Default'
 import {onChangeEmail,onChangePassword,onLogin} from '../../Redux/Actions/userActions'
 import { connect } from 'react-redux'
 import Spinner from 'react-native-loading-spinner-overlay'
+import { TextInput } from 'react-native-paper'
 const Login = ({navigation,onChangeEmail,onChangePassword,onLogin,user}) => {
 
 
@@ -17,16 +18,20 @@ const Login = ({navigation,onChangeEmail,onChangePassword,onLogin,user}) => {
       <KeyboardAvoidingView behavior='padding'>
   
         <Image source={require('../../Image/warline_logo.png')} style={{width:300,height:200}} resizeMode="contain"/>
-        <CredentialsInput
+        <TextInput
+        style={[style.inputBox,{marginBottom:10}]}
         label="Email"
+        mode='outlined'
         value={user.email}
         onChangeText={onChangeEmail}
         placeholder="Email"
         keyboardType="email-address"
         />
-        <CredentialsInput
+        <TextInput
+        style={[style.inputBox,{marginBottom:10}]}
         label="Password"
-        value={user.passwrod}
+        mode='outlined'
+        value={user.password}
         onChangeText={onChangePassword}
         placeholder="Password"
         secureTextEntry

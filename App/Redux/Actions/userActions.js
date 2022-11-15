@@ -17,6 +17,7 @@ export const onLogin = (email,password,navigation)=> {
         .signInWithEmailAndPassword(email, password)
         .then((response) => {
                 dispatch({type:Types.AUTH_SUCSESS,payload:response.user.uid})
+                console.log('ini response login',response)
                 AsyncStorage.setItem('isLogin','true')
                 navigation.navigate('Home')
 
