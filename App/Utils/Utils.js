@@ -21,10 +21,31 @@ const getFileName=(name, path)=> {
     }
     return path.split("/").pop();
 }
+
+const formatText=(text,maxlength)=>{
+    let result = ''
+    if(text.length > maxlength){
+        result = text.slice(0,maxlength) + '...'
+    }else{
+        result = text
+    }
+    return result
+    
+}
+
+const formatCurrency=(price)=>{
+    let formatted= Number(price).toLocaleString('id-ID',{style:'currency',currency:'IDR'}).slice(0,-3)
+    const slicedTExt = formatText(formatted,16)
+    return slicedTExt
+}
+
+
 const Utils = {
     moderateScale,
     getPlatformPath,
-    getFileName
+    getFileName,
+    formatText,
+    formatCurrency
 }
 
 export default Utils

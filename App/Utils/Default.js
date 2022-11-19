@@ -5,6 +5,7 @@ export const Default ={
     deviceHeight : Dimensions.get('window').height,
     primary : '#00A6B4',
     secondary: '#C7DBE6',
-    textColor : '#B5BEC6'
+    textColor : '#B5BEC6',
+   
 }
 

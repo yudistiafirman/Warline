@@ -11,17 +11,16 @@ const AddProductImages = (props) => {
 
 
   return (
-    <View>
-      <View style={{flexDirection:'row'}}>
+  
+    <View style={{flexDirection:'row',marginBottom:20}}>
       <AddImage onAddImage={onAddImage}/>
-       <FlatList
-        horizontal
-        data={images}
-        renderItem={({item,index})=> <ImageWrapper onRemoveImage={()=>onRemoveImage(index)} src={Utils.getPlatformPath(item).value}/>}
-        />
+        {
+          images &&  <ImageWrapper onRemoveImage={onRemoveImage} src={Utils.getPlatformPath(images).value}/>
+        }
+     
    </View>
-   <Text style={{color:Default.textColor,fontWeight:'500',marginVertical:20}}>Add maximum 5 photos</Text>
-  </View>
+   
+
   )
 }
 

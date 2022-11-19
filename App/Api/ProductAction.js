@@ -17,7 +17,7 @@ export const getImageUrl = (fileName,onSuccess,onError)=>{
     task.then((response)=>{
         onSuccess(response)
     }).catch((error)=>{
-        onError(e)
+        onError(error)
     })
 }
 
@@ -37,3 +37,19 @@ export const postProducts = (body,onSuccess,onError)=>{
         onError(error)
     })
 }
+
+export const getAllProducts = (searchValue,lastDocument,onSuccess,onError)=>{
+    console.log('ini search value',searchValue)
+  let query =  firestore().collection('products').orderBy('createdAt','desc').startAt(searchValue)
+    
+  if(lastDocument !== undefined){
+   query = query.startAfter(lastDocument)
+  }
+  
+  query.limit(4).get().then(response=>{
+    onSuccess(response)
+  }).catch(error=>{
+    onError(error)
+  })
+}
+

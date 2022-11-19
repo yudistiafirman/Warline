@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useEffect, version } from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
-import DeviceInfo from 'react-native-device-info'
 import { style } from '../../GlobalStyles'
 
 export const Splash = ({navigation}) => {

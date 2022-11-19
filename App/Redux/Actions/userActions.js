@@ -17,7 +17,7 @@ export const onLogin = (email,password,navigation)=> {
                 dispatch({type:Types.AUTH_SUCSESS,payload:response.user.uid})
                 AsyncStorage.setItem('isLogin','true')
                 navigation.navigate('Home')
-        },(err)=>{
+        },(error)=>{
             dispatch({type:Types.ERROR_LOGIN})
                 if(error.code ==='auth/user-not-found')Alert.alert('The email not connected with any accounts')
                 if(error.code === 'auth/invalid-email')Alert.alert('The email address badly formatted')

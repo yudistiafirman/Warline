@@ -11,17 +11,19 @@ import { TextInput } from 'react-native-paper'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
 import {launchImageLibrary} from 'react-native-image-picker';
 import { utils } from '@react-native-firebase/app'
-import { getImageUrl, getProductsCategory, postProducts, uploadImageToStorage } from '../../Api/AddProductAction'
+import { getImageUrl, getProductsCategory, postProducts, uploadImageToStorage } from '../../Api/ProductAction'
+import uuid from 'react-native-uuid'
 import firestore from '@react-native-firebase/firestore'
 import Spinner from 'react-native-loading-spinner-overlay/lib'
 
 const AddProducts = ({navigation}) => {
-    const [images,setImages]=useState([])
+    const [images,setImages]=useState(null)
     const [selected, setSelectedCategories] = useState('')
     const [productName,setProductName]=useState('')
     const [sku,setSku]=useState('')
     const [price,setPrice]=useState('')
     const [description,setDescription]=useState('')
+    const [weight,setWeight]= useState('')
     const [imageUrl,setImageUrl]=useState([])
     const [loading,setLoading]=useState(false)
     const [category,setCategory]=useState([])
@@ -32,38 +34,21 @@ const AddProducts = ({navigation}) => {
     const onChangeSku=(text)=>{ if(text.length <=50) setSku(text) }
 
     const onChangeDescription =(text)=>{  if(text.length <=500) setDescription(text)}
+    
+    const onChangeWeight = (text)=> {if(text.length <= 10)setWeight(text)}
 
     useEffect(()=>{
       getProductsCategory((response)=>{
+     
             const categoryData = response.docs.map((val,index)=> {
-              return  {key:index.toString(),value:val.data().category_name}
+              return  {key:index.toString(),value:val.data().category_name,categoryId:val._ref._documentPath._parts[1]}
+              
             })
             setCategory(categoryData)
       },(err)=>{
         console.log(err)
       })
     },[])
-
-    const postProductsInfo = ()=>{
-      const imageUrlToSave= images.map((val)=>Utils.getFileName(val.fileName))
-      let body ={
-        categoryName: selected,
-        productName: productName,
-        SKU:sku,
-        description:description,
-        price:price,
-        images:imageUrlToSave,
-        createdAt:firestore.FieldValue.serverTimestamp()
-      }
-      postProducts(body,(response)=>{
-        setLoading(false)
-        Alert.alert('Success', 'New Products successfull added', [
-          { text: 'OK', onPress: () => navigation.goBack() }
-        ])
-      },(error)=>{
-        Alert.alert('Something went wrong')
-      })
-    }
 
     const onAddImage = ()=>{
       var options = {
@@ -76,7 +61,7 @@ const AddProducts = ({navigation}) => {
             path: 'images', // store camera images under Pictures/images for android and Documents/images for iOS
         },
         mediaType:'photo',
-        selectionLimit:5
+        selectionLimit:1
        
     };
     launchImageLibrary(options, response => {
@@ -87,44 +72,66 @@ const AddProducts = ({navigation}) => {
         } else if (response.customButton) {
             console.log('User tapped custom button: ', response.customButton);
         } else {
-            setImages(response.assets)
+          
+            setImages(response.assets[0])
         }
       })
     }
 
-    const onRemoveImage=(idx)=>{
-        const newImageData = images.filter((val,index)=>index !== idx)
-        setImages(newImageData)
+    const onRemoveImage=()=>{
+        
+        setImages(null)
     }
    
-    const uploadProductImages = ()=>{
-      setLoading(true)
-      images.map((val,index)=>{
-        let path = Utils.getPlatformPath(val).value
-        let fileName = Utils.getFileName(val.fileName)
-        uploadImageToStorage(path,fileName,(response)=>{
-          console.log(response)
-
-        },(error)=>{
-            Alert.alert('Upload File To Storage Failed')
-        })
-      })
-    }
-
     const onPublishProduct =  ()=>{
       try {
-        if(images.length < 1)  throw(`Product's image cannot be empty`)
+        if(!images)  throw(`Product's image cannot be empty`)
         if(selected.length < 1)  throw(`Product's category cannot be empty`)
         if(productName.length < 1) throw(`Product's name cannot be empty`)
         if(sku.length <  1)  throw(`Product's Stock Keeping Unit cannot be empty`)
         if(description.length < 1)  throw(`Product's description cannot be empty`)
         if(price.length <  1) throw(`Product's price cannot be empty`)
-        uploadProductImages()
-        postProductsInfo()
+        setLoading(true)
+        let path = Utils.getPlatformPath(images).value
+        let fileName = Utils.getFileName(images.fileName)
+        let filterCategory = category.filter((v,i)=>v.value === selected)
+        let body ={
+          id:uuid.v4(),
+          categoryId: filterCategory[0].categoryId,
+          categoryName:selected,
+          productName: productName,
+          SKU:sku,
+          description:description,
+          price:price,
+          images:'',
+          weight:weight,
+          createdAt:firestore.FieldValue.serverTimestamp()
+        }
+        uploadImageToStorage(path,fileName,(response)=>{
+          getImageUrl(response.metadata.name,(response)=>{
+              body.images = response
+              postProducts(body,(response)=>{
+                setLoading(false)
+                Alert.alert('Success', 'New Products successfull added', [
+                  { text: 'OK', onPress: () => navigation.goBack() }
+                ])
+              },(error)=>{
+                console.log(error)
+                Alert.alert('Failed', 'Something went wrong', [
+                  { text: 'OK', onPress: () => navigation.goBack() }
+                ])
+              })
+          },(error)=>{
+            console.log(error)
+            Alert.alert('get image url failed')
+          })
+        },(error)=>{
+          console.log(error)
+          Alert.alert('upload File to Storage Failed')
+        })
       } catch (error) {
         Alert.alert(error)
       }
-    
     }
 
   
@@ -173,6 +180,17 @@ const AddProducts = ({navigation}) => {
             outlineColor={Default.secondary}
            />
              <Text style={styles.maximumInput}>{`${description.length}/500`}</Text>
+             <TextInput 
+            style={[style.inputBox,styles.productInput]}
+            mode='outlined'
+            multiline
+            value={weight}
+            onChangeText={onChangeWeight}
+            label='Weight/g'
+            keyboardType='number-pad'
+            outlineColor={Default.secondary}
+           />
+             <Text style={styles.maximumInput}>{`${weight.length}/10`}</Text>
             <TextInput 
             style={[style.inputBox,styles.productInput,{marginBottom:20}]}
             mode='outlined'
