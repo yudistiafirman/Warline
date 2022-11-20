@@ -3,15 +3,15 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Default } from '../../Utils/Default'
 import Utils from '../../Utils/Utils'
 
-const ListProduct = ({item}) => {
+const ListProduct = ({item,idx,onPress}) => {
     
   return (
-    <TouchableOpacity style={styles.productContainer}>
+    <TouchableOpacity onPress={()=>onPress(item.id)} style={[styles.productContainer,{ marginRight: idx % 2 !== 0 ? 0 : Utils.moderateScale(5)}]}>
         <View style={styles.imageContainer}>
             <Image 
              source={{uri:item.images}} 
              style={styles.image} 
-             resizeMode='cover'
+             resizeMode='contain'
              />
         </View>
         <View style={{flex:0.2,justifyContent:'center'}}>
@@ -27,12 +27,12 @@ const ListProduct = ({item}) => {
 const styles=StyleSheet.create({
   productContainer:{
     backgroundColor:'white',
-    width:Utils.moderateScale(Default.deviceWidth/2.2),
-    height:Utils.moderateScale(Default.deviceHeight/2.5),
-    margin:5
+    width:Utils.moderateScale(Default.deviceWidth/2.3),
+    height:Utils.moderateScale(Default.deviceHeight/4),
   },
   imageContainer:{
-    flex:0.6
+    flex:0.6,
+   
   },
   image:{
     flex:1

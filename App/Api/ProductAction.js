@@ -39,17 +39,24 @@ export const postProducts = (body,onSuccess,onError)=>{
 }
 
 export const getAllProducts = (searchValue,lastDocument,onSuccess,onError)=>{
-    console.log('ini search value',searchValue)
-  let query =  firestore().collection('products').orderBy('createdAt','desc').startAt(searchValue)
-    
+
+  let query =  firestore().collection('products').where('productName',">=",searchValue).orderBy('productName','asc')    
   if(lastDocument !== undefined){
    query = query.startAfter(lastDocument)
   }
   
-  query.limit(4).get().then(response=>{
+    query.get().then(response=>{
     onSuccess(response)
   }).catch(error=>{
     onError(error)
   })
 }
 
+
+export const getProductDetail = (id,onSuccess,onError)=>{
+    firestore().collection('products').where('id','==',id).get().then((response)=>{
+        onSuccess(response.docs[0].data())
+    }).catch((err)=>{
+        onError(err)
+    })
+}

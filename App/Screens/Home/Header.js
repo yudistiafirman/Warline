@@ -4,13 +4,14 @@ import { Searchbar } from 'react-native-paper'
 import { Default } from '../../Utils/Default'
 import Utils from '../../Utils/Utils'
 
-const Header = ({onSearch,searchValue,onSignOut}) => {
+const Header = ({onSearch,searchValue,onSignOut,searchRef}) => {
   return (
         <View style={styles.headerContainer}>
             <Searchbar
             placeholder='Search'
             onChangeText={onSearch}
             value={searchValue}
+            ref={searchRef}
             style={styles.searchBar}
             />
             <TouchableOpacity onPress={onSignOut} style={styles.signOutBtn}>

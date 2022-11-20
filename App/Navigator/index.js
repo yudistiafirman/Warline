@@ -4,7 +4,7 @@ import Login from '../Screens/Login'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from '../Screens/Home'
 import AddProducts from '../Screens/AddProduct'
-
+import DetailProducts from '../Screens/DetailProduct'
 
 const Stack = createNativeStackNavigator()
 
@@ -14,6 +14,7 @@ const AppRoutes = () => {
         <Stack.Screen options={{headerShown:false}} name="Splash" component={Splash}/>
         <Stack.Screen options={{headerShown:false}} name="Login" component={Login}/>
         <Stack.Screen options={{headerShown:false}} name="Home" component={HomeScreen} />
+        <Stack.Screen options={{headerShown:false}} name="DetailProduct" component={DetailProducts}/>
         <Stack.Screen 
         name="AddProducts" 
         options={{title:"Add Product",headerBackTitleVisible:false}} 

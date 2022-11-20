@@ -7,8 +7,9 @@ import Header from './Header';
 import ListProduct from './ListProduct';
 import { Default } from '../../Utils/Default';
 import { getAllProducts, getImageUrl } from '../../Api/ProductAction';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import WarlineActivityIndicator from '../../Components/AcitivityIndicator';
+import Utils from '../../Utils/Utils';
 const HomeScreen =({navigation})=>{
 
   const [lastDocument, setLastDocument] = useState();
@@ -16,6 +17,7 @@ const HomeScreen =({navigation})=>{
   const [loading,setLoading]=useState(false)
   const [refreshing,setRefreshing]=useState(false)
   const [search,setSearch]=useState('')
+  const searchRef = useRef()
 
 
 
@@ -55,6 +57,7 @@ const HomeScreen =({navigation})=>{
 
   const handleRefresh =useCallback(()=>{
     setRefreshing(true)
+    searchRef.current.clear()
     getAllProducts(search,undefined,(response=>{
       if(response.docs.length > 0){
        
@@ -80,12 +83,12 @@ const HomeScreen =({navigation})=>{
   }
 
   const onSearch =(text)=>{
-  
-    getAllProducts(text,lastDocument,(response)=>{
+    getAllProducts(text,undefined,(response)=>{
       if(response.docs.length > 0){
-        console.log('ini response',response.docs)
         setLastDocument(response.docs[response.docs.length-1])
-        createProductsData(response.docs)
+        const dataAfterRefreshed = response.docs.map((v,i)=> v._data)
+        setProductData(dataAfterRefreshed)
+     
       }
     })
 
@@ -98,24 +101,31 @@ const HomeScreen =({navigation})=>{
       })
    
     }
+
+    const goToDetailProduct =(id)=>{
+      navigation.navigate('DetailProduct',{itemId:id})
+    }
       return (
       <View style={{flex:1,backgroundColor:'#DCFFFF'}}>
-        <Header onSearch={onSearch}  onSignOut={onSignOut}/>
+        <Header onSearch={onSearch} searchRef={searchRef}  onSignOut={onSignOut}/>
         {
           loading ? 
           (
             <WarlineActivityIndicator/>
           ):(
-            <FlatList  
+      
+           <FlatList  
             data={productData} 
             refreshing={refreshing} 
             onRefresh={handleRefresh}
-            numColumns={2} 
-            value={search}
+            numColumns={2}
+            ItemSeparatorComponent={() => <View style={{height: Utils.moderateScale(5)}} />}
             onEndReached={handleOnEndList}
             keyExtractor={(item)=>item.id}
-            renderItem={({item,index})=><ListProduct item={item}/>} 
+            renderItem={({item,index})=><ListProduct onPress={goToDetailProduct} idx={index} item={item}/>} 
             />
+        
+           
           )
         }
        
