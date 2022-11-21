@@ -26,7 +26,8 @@ const styles=StyleSheet.create({
         backgroundColor:Default.primary,
         height:Utils.moderateScale(60),
         alignItems:'center',
-        flexDirection:'row'
+        flexDirection:'row',
+        marginBottom:Utils.moderateScale(5)
     },
     searchBar:{
         width:Utils.moderateScale(Default.deviceWidth/1.5),

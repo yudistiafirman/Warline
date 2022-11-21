@@ -617,6 +617,9 @@ PODS:
     - FirebaseAuth (~> 10.1.0)
   - Firebase/CoreOnly (10.1.0):
     - FirebaseCore (= 10.1.0)
+  - Firebase/Crashlytics (10.1.0):
+    - Firebase/CoreOnly
+    - FirebaseCrashlytics (~> 10.1.0)
   - Firebase/Firestore (10.1.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 10.1.0)
@@ -638,6 +641,13 @@ PODS:
     - FirebaseCore (~> 10.0)
   - FirebaseCoreInternal (10.1.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
+  - FirebaseCrashlytics (10.1.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleDataTransport (~> 9.2)
+    - GoogleUtilities/Environment (~> 7.8)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+    - PromisesObjC (~> 2.1)
   - FirebaseFirestore (10.1.0):
     - abseil/algorithm (~> 1.20211102.0)
     - abseil/base (~> 1.20211102.0)
@@ -651,6 +661,11 @@ PODS:
     - "gRPC-C++ (~> 1.44.0)"
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseInstallations (10.1.0):
+    - FirebaseCore (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - PromisesObjC (~> 2.1)
   - FirebaseStorage (10.1.0):
     - FirebaseAppCheckInterop (~> 10.0)
     - FirebaseAuthInterop (~> 10.0)
@@ -659,6 +674,10 @@ PODS:
     - GTMSessionFetcher/Core (~> 2.1)
   - fmt (6.2.1)
   - glog (0.3.5)
+  - GoogleDataTransport (9.2.0):
+    - GoogleUtilities/Environment (~> 7.7)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+    - PromisesObjC (< 3.0, >= 1.2)
   - GoogleUtilities/AppDelegateSwizzler (7.10.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -673,6 +692,8 @@ PODS:
     - GoogleUtilities/Reachability
   - "GoogleUtilities/NSData+zlib (7.10.0)"
   - GoogleUtilities/Reachability (7.10.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (7.10.0):
     - GoogleUtilities/Logger
   - "gRPC-C++ (1.44.0)":
     - "gRPC-C++/Implementation (= 1.44.0)"
@@ -1033,6 +1054,11 @@ PODS:
     - Firebase/Auth (= 10.1.0)
     - React-Core
     - RNFBApp
+  - RNFBCrashlytics (16.4.6):
+    - Firebase/Crashlytics (= 10.1.0)
+    - FirebaseCoreExtension (= 10.1.0)
+    - React-Core
+    - RNFBApp
   - RNFBFirestore (16.4.4):
     - Firebase/Firestore (= 10.1.0)
     - nanopb (< 2.30910.0, >= 2.30908.0)
@@ -1045,8 +1071,14 @@ PODS:
   - RNScreens (3.18.2):
     - React-Core
     - React-RCTImage
+  - RNSentry (4.8.0):
+    - React-Core
+    - Sentry (= 7.29.0)
   - RNVectorIcons (9.2.0):
     - React-Core
+  - Sentry (7.29.0):
+    - Sentry/Core (= 7.29.0)
+  - Sentry/Core (7.29.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -1088,9 +1120,11 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
+  - "RNFBCrashlytics (from `../node_modules/@react-native-firebase/crashlytics`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
   - "RNFBStorage (from `../node_modules/@react-native-firebase/storage`)"
   - RNScreens (from `../node_modules/react-native-screens`)
+  - "RNSentry (from `../node_modules/@sentry/react-native`)"
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -1105,9 +1139,12 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreExtension
     - FirebaseCoreInternal
+    - FirebaseCrashlytics
     - FirebaseFirestore
+    - FirebaseInstallations
     - FirebaseStorage
     - fmt
+    - GoogleDataTransport
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
@@ -1116,6 +1153,7 @@ SPEC REPOS:
     - Libuv-gRPC
     - nanopb
     - PromisesObjC
+    - Sentry
 
 EXTERNAL SOURCES:
   boost:
@@ -1192,12 +1230,16 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBAuth:
     :path: "../node_modules/@react-native-firebase/auth"
+  RNFBCrashlytics:
+    :path: "../node_modules/@react-native-firebase/crashlytics"
   RNFBFirestore:
     :path: "../node_modules/@react-native-firebase/firestore"
   RNFBStorage:
     :path: "../node_modules/@react-native-firebase/storage"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSentry:
+    :path: "../node_modules/@sentry/react-native"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   Yoga:
@@ -1217,10 +1259,13 @@ SPEC CHECKSUMS:
   FirebaseCore: 55e7ae35991ccca4db03ff8d8df6ed5f17a3e4c7
   FirebaseCoreExtension: 69b966c399abc4ca6dc75006ab87160f81512725
   FirebaseCoreInternal: 96d75228e10fd369564da51bd898414eb0f54df5
+  FirebaseCrashlytics: 93906d7085eb3e4dd90d08fe42a15d4f0406b6ab
   FirebaseFirestore: d482e5e0f95dba8ef5d499a7efa87ba2f56ef0c0
+  FirebaseInstallations: 99d24bac0243cf8b0e96cf5426340d211f0bcc80
   FirebaseStorage: 132c10c4d2f8ed8afbfa918eb35d19a87f383d59
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
+  GoogleDataTransport: 1c8145da7117bd68bbbed00cf304edb6a24de00f
   GoogleUtilities: bad72cb363809015b1f7f19beb1f1cd23c589f95
   "gRPC-C++": 9675f953ace2b3de7c506039d77be1f2e77a8db2
   gRPC-Core: 943e491cb0d45598b0b0eb9e910c88080369290b
@@ -1261,10 +1306,13 @@ SPEC CHECKSUMS:
   RNDeviceInfo: 4701f0bf2a06b34654745053db0ce4cb0c53ada7
   RNFBApp: 18468d88f518831e4d34a77e1c076a80e40929a2
   RNFBAuth: f68c1dbe70bdce33b7bdac9d1bad89753b4e7bd0
+  RNFBCrashlytics: 4af81419288c6a774e02e726346ee8a065939863
   RNFBFirestore: 66f7db7673c68ecfeacef9ae203f647f2840ae18
   RNFBStorage: 3fa7f2ef6fc5221f38a8777a1f375f3f1a3805d8
   RNScreens: 34cc502acf1b916c582c60003dc3089fa01dc66d
+  RNSentry: db7fd7b66efda28885e4e904a8b5e7349aec61c1
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
+  Sentry: 4272663eb0eda312024d795ca3f5a562a8ce5e18
   Yoga: eca980a5771bf114c41a754098cd85e6e0d90ed7
 
 PODFILE CHECKSUM: 9f82d85695352ea782a5957e84698feab664d2e0

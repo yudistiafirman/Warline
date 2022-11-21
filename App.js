@@ -15,11 +15,13 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import rootReducers from './App/Redux/Reducers'
 import thunk from 'redux-thunk'
+import * as Sentry from "@sentry/react-native"
+import initSentry from './Sentry';
 
 const store = createStore(rootReducers, applyMiddleware(thunk))
 
 const App: () => Node = () => {
-
+  initSentry()
   return (
     <Provider store={store}>
      <NavigationContainer>
@@ -35,4 +37,4 @@ const App: () => Node = () => {
 
 
 
-export default App;
+export default Sentry.wrap(App) ;

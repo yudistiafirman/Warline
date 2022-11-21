@@ -137,7 +137,7 @@ const AddProducts = ({navigation}) => {
   
   return (
     <KeyboardAwareScrollView style={{flex:1,backgroundColor:'white'}}>
-        <View style={{marginTop:10,marginLeft:10}}>
+        <View style={{marginVertical:10,marginLeft:10}}>
           <AddProductImages onRemoveImage={onRemoveImage} onAddImage={onAddImage} images={images} />
           <SelectList 
             setSelected={(val) => setSelectedCategories(val)} 

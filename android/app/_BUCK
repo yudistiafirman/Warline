@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.warline",
+    package = "com.warline.app",
 )
 
 android_resource(
     name = "res",
-    package = "com.warline",
+    package = "com.warline.app",
     res = "src/main/res",
 )
 

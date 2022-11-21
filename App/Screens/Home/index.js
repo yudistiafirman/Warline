@@ -10,6 +10,7 @@ import { getAllProducts, getImageUrl } from '../../Api/ProductAction';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import WarlineActivityIndicator from '../../Components/AcitivityIndicator';
 import Utils from '../../Utils/Utils';
+import * as Sentry from "@sentry/react-native";
 const HomeScreen =({navigation})=>{
 
   const [lastDocument, setLastDocument] = useState();
@@ -122,6 +123,7 @@ const HomeScreen =({navigation})=>{
             ItemSeparatorComponent={() => <View style={{height: Utils.moderateScale(5)}} />}
             onEndReached={handleOnEndList}
             keyExtractor={(item)=>item.id}
+            contentContainerStyle={{alignItems:'center'}}
             renderItem={({item,index})=><ListProduct onPress={goToDetailProduct} idx={index} item={item}/>} 
             />
         

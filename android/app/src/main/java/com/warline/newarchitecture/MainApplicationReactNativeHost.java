@@ -1,4 +1,4 @@
-package com.warline.newarchitecture;
+package com.warline.app.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.warline.BuildConfig;
-import com.warline.newarchitecture.components.MainComponentsRegistry;
-import com.warline.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.warline.app.BuildConfig;
+import com.warline.app.newarchitecture.components.MainComponentsRegistry;
+import com.warline.app.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

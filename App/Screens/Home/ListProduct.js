@@ -28,7 +28,7 @@ const styles=StyleSheet.create({
   productContainer:{
     backgroundColor:'white',
     width:Utils.moderateScale(Default.deviceWidth/2.3),
-    height:Utils.moderateScale(Default.deviceHeight/4),
+    height:Utils.moderateScale(Default.deviceHeight/3),
   },
   imageContainer:{
     flex:0.6,

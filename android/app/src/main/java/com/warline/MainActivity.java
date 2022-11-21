@@ -1,4 +1,4 @@
-package com.warline;
+package com.warline.app;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

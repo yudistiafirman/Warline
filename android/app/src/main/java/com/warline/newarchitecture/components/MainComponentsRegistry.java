@@ -1,4 +1,4 @@
-package com.warline.newarchitecture.components;
+package com.warline.app.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
