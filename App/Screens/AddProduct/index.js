@@ -50,7 +50,7 @@ const AddProducts = ({navigation}) => {
       })
     },[])
 
-    const onAddImage = ()=>{
+    const onAddImage = useCallback(()=>{
       var options = {
         title: 'Select Image',
         customButtons: [
@@ -71,12 +71,11 @@ const AddProducts = ({navigation}) => {
             console.log('ImagePicker Error: ', response.error);
         } else if (response.customButton) {
             console.log('User tapped custom button: ', response.customButton);
-        } else {
-          
+        } else { 
             setImages(response.assets[0])
         }
       })
-    }
+    },[images])
 
     const onRemoveImage=()=>{
         
@@ -91,8 +90,9 @@ const AddProducts = ({navigation}) => {
         if(sku.length <  1)  throw(`Product's Stock Keeping Unit cannot be empty`)
         if(description.length < 1)  throw(`Product's description cannot be empty`)
         if(price.length <  1) throw(`Product's price cannot be empty`)
+        if(price.includes('.')) throw(`invalid format product's price `)
         setLoading(true)
-        let path = Utils.getPlatformPath(images).value
+        let path = Utils.getPlatformPath(images)
         let fileName = Utils.getFileName(images.fileName)
         let filterCategory = category.filter((v,i)=>v.value === selected)
         let body ={
@@ -187,20 +187,20 @@ const AddProducts = ({navigation}) => {
             value={weight}
             onChangeText={onChangeWeight}
             label='Weight/g'
-            keyboardType='number-pad'
+            keyboardType='numeric'
             outlineColor={Default.secondary}
            />
              <Text style={styles.maximumInput}>{`${weight.length}/10`}</Text>
             <TextInput 
-            style={[style.inputBox,styles.productInput,{marginBottom:20}]}
+            style={[style.inputBox,styles.productInput]}
             mode='outlined'
             value={price}
             onChangeText={(value)=>setPrice(value)}
             label='Price'
-            keyboardType='number-pad'
+            keyboardType='numeric'
             outlineColor={Default.secondary}
            />
-            
+               <Text style={[styles.maximumInput,{marginBottom:Utils.moderateScale(20),textAlign:'left'}]}>example:5000 will be converted to Rp5.000 in products page</Text>
           <TouchableOpacity  onPress={onPublishProduct}  style={styles.publishButton}>
                 <Text style={style.buttonText}>Publish</Text>
           </TouchableOpacity>
@@ -225,7 +225,7 @@ const styles= StyleSheet.create({
   },
   productInput :{
     width:Default.deviceWidth/1.06,
-    height:Utils.moderateScale(50),
+    height:Utils.moderateScale(60),
  
   },
   publishButton:{

@@ -7,14 +7,11 @@ const guidelineBaseWidth = 350
 const guidelineBaseHeight = 680
 const scale = size => width / guidelineBaseWidth * size
 const moderateScale = (size, factor = 0.5) => size + (scale(size) - size) * factor
-const getPlatformPath = ({path, uri})=>{
-    return Platform.select({
-      android: { "value": path },
-      ios: { "value": uri }
-  })
+const getPlatformPath = (media)=>{
+    return media.uri
   }
 const getFileName=(name, path)=> {
-    if (name != null) { return name; }
+    if (name != null) { return name }
 
     if (Platform.OS === "ios") {
         path = "~" + path.substring(path.indexOf("/Documents"));
@@ -34,7 +31,10 @@ const formatText=(text,maxlength)=>{
 }
 
 const formatCurrency=(price)=>{
-    let formatted= Number(price).toLocaleString('id-ID',{style:'currency',currency:'IDR'}).slice(0,-3)
+    let formatted= Number(price).toLocaleString('id-ID',{style:'currency',currency:'IDR'})
+    if(Platform.OS === 'ios'){
+     formatted = formatted.slice(0,-3)
+    }
     const slicedTExt = formatText(formatted,16)
     return slicedTExt
 }

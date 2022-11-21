@@ -9,13 +9,12 @@ const AddProductImages = (props) => {
     let images = props.images
     let onRemoveImage = props.onRemoveImage
 
-
   return (
   
     <View style={{flexDirection:'row',marginBottom:20}}>
       <AddImage onAddImage={onAddImage}/>
         {
-          images &&  <ImageWrapper onRemoveImage={onRemoveImage} src={Utils.getPlatformPath(images).value}/>
+          images &&  <ImageWrapper onRemoveImage={onRemoveImage} src={Utils.getPlatformPath(images)}/>
         }
      
    </View>

@@ -45,7 +45,7 @@ const Specification = ({visible,onCloseModal,category,sku,weight}) => {
     style={{justifyContent:'flex-end',margin:0}}
     >
     <View style={[DetailStyles.centeredView]}>
-           <View style={{flex:0.6,borderWidth:1,justifyContent:'center',alignItems:'center',flexDirection:'row',borderBottomColor:Default.secondary}}>
+           <View style={{flex:0.6,borderBottomWidth:1,justifyContent:'center',alignItems:'center',flexDirection:'row',borderBottomColor:Default.secondary}}>
                 <Text style={[DetailStyles.specsText]}>Specification</Text>
                 <Icon onPress={onCloseModal} name="close" style={{left:Default.deviceWidth/3}} size={Utils.moderateScale(20)}/>
            </View>
