@@ -27,3 +27,9 @@
   
    <img width="160px" src="https://user-images.githubusercontent.com/69186726/203020884-b933b244-49b4-419e-afc9-6389caaaa7dd.jpeg"><br/> 
    in homepage / all products page , there is an button with + icon to bring users to add products page . 
+   
+   
+   <img width="160px" src="https://user-images.githubusercontent.com/69186726/203041031-fe064483-8f95-48b7-92c8-68419bff2100.png"><br/> 
+   users can add new product in this page , tap the square shape with + icon to add products image and fill up all the form available to insert information    of new products.
+   user is required to add image of products and fill up form the form accordingly otherwise new products cannot be added , after user fill up all the form 
+   tap publish button to publish the new products . 
