@@ -14,6 +14,9 @@ const productDetailReducer = (state=data,action)=>{
             return {...state,loading:true}
         case Types.FINISH_LOADING_DETAIL:
             return {...state,loading:false}
+        case Types.EMPTY_PRODUCT_DETAIL:{
+            return {...state,productDetail:null}
+        }
         default : return state
     }
 }

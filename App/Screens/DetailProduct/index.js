@@ -30,6 +30,7 @@ const DetailProducts = ({route,navigation,productDetailData}) => {
             })
             dispatch({type:Types.FINISH_LOADING_DETAIL})
         })
+        return ()=> dispatch({type:Types.EMPTY_PRODUCT_DETAIL})
     },[itemId])
 
     useEffect(()=>{
