@@ -41,6 +41,17 @@
     tap one of product in home screen , then users will be directed to product detail page and tap categories ,Sku, weight side to see more details about t     the product.
 
      <img width="160px" src="https://user-images.githubusercontent.com/69186726/203045850-f6874436-b8e0-421d-bc35-0e00cdfa4ac3.png"><br/> 
+     
+     
+# Technologies
+
+
+  - firebase authentication 
+  - firebase cloud store
+  - firebase cloud storage
+  - firebase crashltytics
+  - sentry
+  - redux
     
   
   
