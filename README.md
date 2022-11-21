@@ -11,15 +11,15 @@
 # Features
 
 - Login 
-
-    
+  <img width="160px" src="https://user-images.githubusercontent.com/69186726/203019367-19d90c39-5a7f-4739-a8b2-4ec3650e69c8.png"><br/> 
+  https://user-images.githubusercontent.com/69186726/203019367-19d90c39-5a7f-4739-a8b2-4ec3650e69c8.png
   kindly enter  user crendentials below to login  : <br />
   user : test_user@gmail.com <br />
   password : Rahasiadon6
   
 - All Products Page 
   
-  <img width="160px" src="https://user-images.githubusercontent.com/69186726/203018100-3b07806a-82d6-49f2-825f-0a813ffd854d.png"><br/> 
+  
   After user successfully login , user will be directed to Home page, in that page users could see all products those has been added.
   this page has search features where users can search particular product that users wish to looked.
   
