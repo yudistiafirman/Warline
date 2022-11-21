@@ -24,5 +24,6 @@
   this page has search features where users can search particular product that users wish to looked.
   
 - Add Products Page
-
-  in homepage / all products page , there is an button with + icon to bring users to add products page . 
+  
+   <img width="160px" src="https://user-images.githubusercontent.com/69186726/203020884-b933b244-49b4-419e-afc9-6389caaaa7dd.jpeg"><br/> 
+   in homepage / all products page , there is an button with + icon to bring users to add products page . 
