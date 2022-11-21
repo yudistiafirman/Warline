@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ImageBackground, Text, TouchableOpacity, View } from 'react-native'
+import { BackHandler, ImageBackground, Text, TouchableOpacity, View } from 'react-native'
 import { connect, useDispatch } from 'react-redux'
 import { getProductDetail } from '../../Api/ProductAction'
 import WarlineActivityIndicator from '../../Components/AcitivityIndicator'
@@ -32,7 +32,13 @@ const DetailProducts = ({route,navigation,productDetailData}) => {
         })
     },[itemId])
 
-  
+    useEffect(()=>{
+      const backAction =  BackHandler.addEventListener('hardwareBackPress',()=>{
+        navigation.goBack()
+        return true
+      })
+      return () => backAction.remove()
+    },[])
 
   return (
     <View style={{flex:1,backgroundColor:'white'}} >

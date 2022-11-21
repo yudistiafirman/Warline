@@ -32,9 +32,9 @@ const formatText=(text,maxlength)=>{
 
 const formatCurrency=(price)=>{
     let formatted= Number(price).toLocaleString('id-ID',{style:'currency',currency:'IDR'})
-    if(Platform.OS === 'ios'){
+
      formatted = formatted.slice(0,-3)
-    }
+  
     const slicedTExt = formatText(formatted,16)
     return slicedTExt
 }

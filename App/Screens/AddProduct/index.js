@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { Alert, FlatList,Platform,StyleSheet,Text, TouchableOpacity, View } from 'react-native'
+import { Alert, BackHandler, FlatList,Platform,StyleSheet,Text, TouchableOpacity, View } from 'react-native'
 import AddImage from '../../Components/AddImage'
 import ImageWrapper from '../../Components/ImageWrapper'
 import { style } from '../../GlobalStyles'
@@ -48,6 +48,14 @@ const AddProducts = ({navigation}) => {
       },(err)=>{
         console.log(err)
       })
+    },[])
+
+    useEffect(()=>{
+      const backAction =  BackHandler.addEventListener('hardwareBackPress',()=>{
+        navigation.goBack()
+        return true
+      })
+      return () => backAction.remove()
     },[])
 
     const onAddImage = useCallback(()=>{

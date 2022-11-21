@@ -1,6 +1,6 @@
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { View,Text,TouchableOpacity, FlatList } from 'react-native';
+import { View,Text,TouchableOpacity, FlatList, Alert, BackHandler } from 'react-native';
 import AddButton from '../../Components/AddButton';
 import { style } from '../../GlobalStyles';
 import Header from './Header';
@@ -25,7 +25,26 @@ const HomeScreen =({navigation})=>{
   useEffect(()=>{
     getAllProductsData()
   },[])
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Hold on!", "Are you sure you want to go back?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => BackHandler.exitApp() }
+      ]);
+      return true;
+    };
 
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
   const getAllProductsData =()=>{
     setLoading(true)
     getAllProducts(search,lastDocument,(response)=>{

@@ -1,5 +1,5 @@
-import React from 'react'
-import { View,Text, StyleSheet, KeyboardAvoidingView, Image } from 'react-native'
+import React, { useEffect } from 'react'
+import { View,Text, StyleSheet, KeyboardAvoidingView, Image, Alert, BackHandler } from 'react-native'
 import CredentialsButton from '../../Components/CredentialsButton'
 import CredentialsInput from '../../Components/CredentialsInput'
 import { style } from '../../GlobalStyles'
@@ -10,7 +10,26 @@ import Spinner from 'react-native-loading-spinner-overlay'
 import { TextInput } from 'react-native-paper'
 const Login = ({navigation,onChangeEmail,onChangePassword,onLogin,user}) => {
 
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Hold on!", "Are you sure you want to go back?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => BackHandler.exitApp() }
+      ]);
+      return true;
+    };
 
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
 
   return (
