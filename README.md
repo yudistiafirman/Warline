@@ -35,5 +35,8 @@
    tap publish button to publish the new products . 
    
 - Product Detail 
+    <img width="160px" src="https://user-images.githubusercontent.com/69186726/203045710-0f79d10a-ab30-48d1-9b19-9d257eb55feb.jpeg"><br/> 
+
+    tap one of product in home screen , then users will be directed to product detail page and tap categories ,Sku, weight side to see more details about t     the product
   
   
