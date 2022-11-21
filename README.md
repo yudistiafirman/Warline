@@ -52,6 +52,7 @@
   - firebase crashltytics
   - sentry
   - redux
+  - etc
     
   
   
