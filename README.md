@@ -21,7 +21,9 @@
 
   <img width="160px" src="https://user-images.githubusercontent.com/69186726/203018100-3b07806a-82d6-49f2-825f-0a813ffd854d.png"><br/> 
   After user successfully login , user will be directed to Home page, in that page users could see all products those has been added.
-  this page has search features where users can search particular product that users wish to looked.
+  this page has search features where users can search particular product that users wish to looked due to incapabilites firebase store 
+  to full text search , it needs to upgrade the plan to paid plan (blaze plan) and install 3rd parties extensions in order to enable full text 
+  search so when users search the particular product , it will show on top list products.
   
 - Add Products Page
   
